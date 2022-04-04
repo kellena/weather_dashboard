@@ -10,11 +10,33 @@
     <title>Weather API Dashboard</title>
 </head>
 <body>
-    
+    <!-- header for Weather Dashboard -->
     <header class="container-fluid text-center text-black">
         <h1>Weather Dashboard</h1>
     </header>
 
+    <div class="container">
+        <div class="row">
+
+            <!-- area for searching city -->
+            <div class="col-md-3">
+                <!--  -->
+                <form>
+                    <label for="search-city">Search for a City:</label>
+                    <div class="form-row">
+                        <input id="searchCity"  name="city" value=""></input>
+                        <button id="search-button" class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 
 </body>
