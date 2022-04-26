@@ -32,7 +32,6 @@ function displayPreviousCities() {
             getAPI(previousCities)
         }
     })
-
 }
 
 function getHistory() {
@@ -48,6 +47,24 @@ function getHistory() {
 function storeCities() {
     localStorage.setItem('previousCities', JSON.stringify(previousCities));
 }
+
+searchEl.addEventListener('submit', function(event){
+    console.log(event)
+    event.preventDefault();
+    var city = searchHist.value;
+
+    getAPI(city);
+ 
+    previousCities.push(city);
+    searchHist.value = "";
+ 
+    if(previousCities.length > 6) {
+        previousCities.shift();
+    }
+
+    storeCities();
+    getHistory();
+});
 
 function displayCurrentWeather(name, resultObject) {
     // display today's forecast
