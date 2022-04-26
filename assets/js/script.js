@@ -35,6 +35,24 @@ function displayPreviousCities() {
 
 }
 
+function getHistory() {
+    // get list of recent cities from local storage
+}
+
+function storeCities() {
+    // store recent searches
+}
+
+function displayCurrentWeather(name, resultObject) {
+    // display today's forecast
+}
+
+function displayForecastWeather(resultObject) {
+    // display five-day forecast
+}
+
+
+
 function getAPI(cityID) {
     var key = 'fcfd8f094c533b7224130fcd283eee7b';
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityID+ '&units=imperial&&appid=' + key)
@@ -43,4 +61,17 @@ function getAPI(cityID) {
         console.log(data)
         getWeatherAPI(data.name ,data.coord.lat, data.coord.lon)
     }) 
+}
+
+function getWeatherAPI(name, lat, lon) {
+    var key = 'fcfd8f094c533b7224130fcd283eee7b';
+    fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + lon + '&units=imperial&exclude=minutely,hourly,alerts&appid=' + key)
+    .then(function(response){return response.json()})
+    .then(function(data){
+        console.log(data)
+        currentWeather.textContent = '';
+        forecast.textContent = '';
+        displayCurrentWeather(name, data)
+        displayForecastWeather(data)
+    })
 }
