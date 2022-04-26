@@ -87,6 +87,25 @@ function displayCurrentWeather(name, resultObject) {
     bodyContentEl.innerHTML = '<strong>Temperature:</strong> ' + resultObject.current.temp + ' °F' + '<br/>';
     bodyContentEl.innerHTML += '<strong>Humidity:</strong> ' + resultObject.current.humidity + "%"+ '<br/>';
     bodyContentEl.innerHTML += '<strong>Wind:</strong> ' + resultObject.current.wind_speed + " MPH"+ '<br/>';
+
+    var uvText = document.createElement('p');
+    var uvEl = document.createElement('span');
+    var uvIndex = uvEl.textContent = resultObject.current.uvi
+    uvText.innerHTML = "<strong>UV index:</strong> "
+    uvText.append(uvEl)
+    bodyContentEl.append(uvText)
+
+    if (uvIndex < 3) {
+        uvEl.classList.add('low-uv')
+    } else if (uvIndex >= 3 && uvIndex < 8) {
+        uvEl.classList.add('medium-uv')
+    } else {
+        uvEl.classList.add('high-uv')
+    }
+
+    resultBody.append(titleEl, iconEl, bodyContentEl);
+
+    currentWeather.append(resultCard);
 }
 
 function displayForecastWeather(resultObject) {
