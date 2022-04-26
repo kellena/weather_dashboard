@@ -67,7 +67,26 @@ searchEl.addEventListener('submit', function(event){
 });
 
 function displayCurrentWeather(name, resultObject) {
-    // display today's forecast
+    var resultCard = document.createElement('div');
+    resultCard.classList.add('card', 'bg-dark', 'text-light', 'm-1', 'p-0'); 
+    
+    var resultBody = document.createElement('div');
+    resultBody.classList.add('card-body');
+    resultCard.append(resultBody);
+
+    var titleEl = document.createElement('h3');
+    var day = moment.unix(resultObject.daily[0].dt);
+    titleEl.textContent = name + ' (' + day.format("M/D/YYYY") + ')'
+    
+    console.log(name);
+
+    var iconEl = document.createElement('img');
+    iconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + resultObject.current.weather[0].icon + "@2x.png")
+
+    var bodyContentEl = document.createElement('p');
+    bodyContentEl.innerHTML = '<strong>Temperature:</strong> ' + resultObject.current.temp + ' °F' + '<br/>';
+    bodyContentEl.innerHTML += '<strong>Humidity:</strong> ' + resultObject.current.humidity + "%"+ '<br/>';
+    bodyContentEl.innerHTML += '<strong>Wind:</strong> ' + resultObject.current.wind_speed + " MPH"+ '<br/>';
 }
 
 function displayForecastWeather(resultObject) {
