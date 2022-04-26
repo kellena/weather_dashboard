@@ -11,7 +11,7 @@ function displayPreviousCities() {
 
     cityList.innerHTML = "";
 
-        for (var i = 0; i < cityHistory.length; i++) {
+        for (var i = 0; i < previousCities.length; i++) {
            var searchedCities = previousCities[i];
    
            var li = document.createElement('li');
@@ -27,20 +27,26 @@ function displayPreviousCities() {
         
         if(element.matches('li') === true) {
             console.log(element.innerHTML)
-            var cityHistory = element.innerHTML
+            var previousCities = element.innerHTML
             
-            getAPI(cityHistory)
+            getAPI(previousCities)
         }
     })
 
 }
 
 function getHistory() {
-    // get list of recent cities from local storage
+    var storedCities = JSON.parse(localStorage.getItem('previousCities'))
+     
+    if(storedCities !== null) {
+        previousCities = storedCities
+    }
+
+    displayPreviousCities();
 }
 
 function storeCities() {
-    // store recent searches
+    localStorage.setItem('previousCities', JSON.stringify(previousCities));
 }
 
 function displayCurrentWeather(name, resultObject) {
