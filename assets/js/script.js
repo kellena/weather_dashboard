@@ -4,6 +4,7 @@ var searchHist = document.getElementById("searchHistory")
 var currentWeather = document.getElementById("currentWeather")
 var forecastWeather = document.getElementById("forecast")
 var cityList = document.getElementById("cityList")
+var cityName = document.getElementById("city")
 
 var previousCities = [];
 
@@ -71,15 +72,15 @@ function storeCities() {
     localStorage.setItem('previousCities', JSON.stringify(previousCities));
 }
 
-searchEl.addEventListener('submit', function(event){
+searchCity.addEventListener('click', function(event){
     console.log(event)
     event.preventDefault();
-    var city = searchHist.value;
+    var city = cityName.value;
 
     getAPI(city);
  
     previousCities.push(city);
-    searchHist.value = "";
+    cityName.value = "";
  
     if(previousCities.length > 6) {
         previousCities.shift();
