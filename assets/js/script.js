@@ -7,6 +7,29 @@ var cityList = document.getElementById("cityList")
 
 var previousCities = [];
 
+function getWeatherAPI(name, lat, lon) {
+    var key = 'fcfd8f094c533b7224130fcd283eee7b';
+    fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + lon + '&units=imperial&exclude=minutely,hourly,alerts&appid=' + key)
+    .then(function(response){return response.json()})
+    .then(function(data){
+        console.log(data)
+        currentWeather.textContent = '';
+        forecast.textContent = '';
+        displayCurrentWeather(name, data)
+        displayForecastWeather(data)
+    })
+}
+
+function getAPI(cityID) {
+    var key = 'fcfd8f094c533b7224130fcd283eee7b';
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityID+ '&units=imperial&&appid=' + key)
+    .then(function(response){return response.json()}) 
+    .then(function(data) {
+        console.log(data)
+        getWeatherAPI(data.name ,data.coord.lat, data.coord.lon)
+    }) 
+}
+
 function displayPreviousCities() {
 
     cityList.innerHTML = "";
@@ -136,29 +159,4 @@ function displayForecastWeather(resultObject) {
 
         forecast.append(resultColumn)
 
-}
-
-
-
-function getAPI(cityID) {
-    var key = 'fcfd8f094c533b7224130fcd283eee7b';
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityID+ '&units=imperial&&appid=' + key)
-    .then(function(response){return response.json()}) 
-    .then(function(data) {
-        console.log(data)
-        getWeatherAPI(data.name ,data.coord.lat, data.coord.lon)
-    }) 
-}
-
-function getWeatherAPI(name, lat, lon) {
-    var key = 'fcfd8f094c533b7224130fcd283eee7b';
-    fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + lon + '&units=imperial&exclude=minutely,hourly,alerts&appid=' + key)
-    .then(function(response){return response.json()})
-    .then(function(data){
-        console.log(data)
-        currentWeather.textContent = '';
-        forecast.textContent = '';
-        displayCurrentWeather(name, data)
-        displayForecastWeather(data)
-    })
-}
+}}
