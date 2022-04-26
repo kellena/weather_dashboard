@@ -13,7 +13,7 @@ function displayPreviousCities() {
 
     cityList.innerHTML = "";
 
-       for (var i = 0; i < cityHistory.length; i++) {
+        for (var i = 0; i < cityHistory.length; i++) {
            var searchedCities = previousCities[i];
    
            var li = document.createElement('li');
@@ -23,4 +23,16 @@ function displayPreviousCities() {
            cityList.appendChild(li);   
        }
        
+    cityList.addEventListener('click', function(event){     
+        console.log(event)
+        var element = event.target;
+        
+        if(element.matches('li') === true) {
+            console.log(element.innerHTML)
+            var cityHistory = element.innerHTML
+            
+            getAPI(cityHistory)
+        }
+    })
+
 }
