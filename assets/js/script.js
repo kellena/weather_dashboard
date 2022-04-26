@@ -109,7 +109,33 @@ function displayCurrentWeather(name, resultObject) {
 }
 
 function displayForecastWeather(resultObject) {
-    // display five-day forecast
+    for (var i = 1; i < 6; i++) {
+        var resultColumn = document.createElement('div');
+        resultColumn.classList.add('col-md-2.5','m-auto');
+
+        var resultCard = document.createElement('div');
+        resultCard.classList.add('card', 'bg-dark', 'text-light',); 
+        resultColumn.append(resultCard)
+
+        var resultBody = document.createElement('div');
+        resultBody.classList.add('card-body');
+        resultCard.append(resultBody)
+
+        var titleEl = document.createElement('h4');
+        var day = moment.unix(resultObject.daily[i].dt);
+        titleEl.textContent = day.format("M/D/YYYY")
+
+        var iconEl = document.createElement('img');
+        iconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + resultObject.daily[i].weather[0].icon + "@2x.png")
+
+        var bodyContentEl = document.createElement('p');
+        bodyContentEl.innerHTML = '<strong>Temperature:</strong> ' + resultObject.daily[i].temp.day + ' °F' + '<br/>';
+        bodyContentEl.innerHTML += '<strong>Humidity:</strong> ' + resultObject.daily[i].humidity + "%"+ '<br/>';
+        bodyContentEl.innerHTML += '<strong>Wind:</strong> ' + resultObject.daily[i].wind_speed + " MPH"+ '<br/>';
+        resultBody.append(titleEl, iconEl, bodyContentEl);
+
+        forecast.append(resultColumn)
+
 }
 
 
